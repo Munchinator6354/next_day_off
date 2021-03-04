@@ -1,0 +1,25 @@
+24
+7 3 2020 Independence Day Holiday
+9 7 2020 Labor Day Holiday
+11 11 2020 Veterans Day Holiday
+11 26 2020 Thanksgiving Holiday
+11 27 2020 Thanksgiving Holiday
+11 28 2020 Thanksgiving Holiday
+12 19 2020 Winter Break
+12 19 2020 Winter Break
+12 20 2020 Winter Break
+12 21 2020 Winter Break
+12 22 2020 Winter Break
+12 23 2020 Winter Break
+12 24 2020 Winter Break
+12 25 2020 Winter Break
+12 26 2020 Winter Break
+12 27 2020 Winter Break
+1 18 2021 Martin Luther King Jr. Holiday
+2 15 2021 Presidents Day Holiday
+3 22 2021 Spring Break
+3 23 2021 Spring Break
+3 24 2021 Spring Break
+3 25 2021 Spring Break
+3 26 2021 Spring Break
+5 31 2021 Memorial Day holiday

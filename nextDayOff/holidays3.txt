@@ -1,0 +1,29 @@
+28
+1 25 2008 Opposite Day
+5 20 2008 National Rescue Dog Day
+6 25 2008 Take Your Dog To Work Day
+8 8 2008 International Cat Day
+8 17 2008 Black Cat Appreciation Day
+10 27 2008 National Black Cat Day
+10 29 2008 National Cat Day
+1 25 2020 Opposite Day
+5 20 2020 National Rescue Dog Day
+6 25 2020 Take Your Dog To Work Day
+8 8 2020 International Cat Day
+8 17 2020 Black Cat Appreciation Day
+10 27 2020 National Black Cat Day
+10 29 2020 National Cat Day
+1 25 2021 Opposite Day
+5 20 2021 National Rescue Dog Day
+6 25 2021 Take Your Dog To Work Day
+8 8 2021 International Cat Day
+8 17 2021 Black Cat Appreciation Day
+10 27 2021 National Black Cat Day
+10 29 2021 National Cat Day
+1 25 2029 Opposite Day
+5 20 2029 National Rescue Dog Day
+6 25 2029 Take Your Dog To Work Day
+8 8 2029 International Cat Day
+8 17 2029 Black Cat Appreciation Day
+10 27 2029 National Black Cat Day
+10 29 2029 National Cat Day
