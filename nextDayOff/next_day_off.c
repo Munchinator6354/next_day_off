@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct Date {
   int month;
@@ -39,6 +40,39 @@ typedef struct Date {
 // printf("%d %d %d", date_given.month, date_given.day, date_given.year);
 
 
+// Compares two dates, returns -1 if Date1 before Date 2, returns 0 if Date1 is
+//  equal to Date2, returns 1 if Date2 is before Date1.
+int compare(Date* d1, Date* d2) {
+  if(d1->year < d2->year) {
+    return -1;
+  } else if(d1->year == d2->year d1->month < d2->month) {
+    return -1;
+  } else if(d1->year == d2->year d1->month == d2->month && d1->day < d2->day) {
+    return -1;
+  } else if(d1->year == d2->year d1->month == d2->month && d1->day == d2->day) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+void next_day(Date* d) {
+  
+}
+
+// Given a pointer to a Date struct, returns the amount of days in that month.
+int days_in_month(Date* d) {
+  if(d->month == 2 && d->year % 4 == 0 && d->year % 100 != 0) {
+    return 29;
+  } else if(d->month == 2) {
+    return 28;
+  } else if(d->month == 4 ||d->month == 6 ||d->month == 9 ||d->month == 11) {
+    return 30;
+  } else {
+    return 31;
+  }
+}
+
 // Asks the user for the current date in a month/dat/year format.
 void ask_for_date(int *month_given, int *day_given, int *year_given) {
   printf("What is the current date (month day year)? ");
@@ -50,6 +84,7 @@ int main() {
   int day_given;
   int year_given;
 
+  // Asks the user for the current date.
   ask_for_date(&month_given, &day_given, &year_given);
 
   Date date_given = {month_given, day_given, year_given};
@@ -66,13 +101,23 @@ int main() {
   int month;
   int day;
   int year;
-  char reason[500];
+  char reason[100];
 
+  // Goes through the file and grabs the holiday date from each line.
   while(fscanf(file, "%d %d %d %[^\n]\n", &month, &day, &year, reason) != EOF) {
     Date current = {month, day, year};
     holidays[index] = current;
+
+    // THIS WAS TO TEST DAYS IN MONTH FUNCTION
+    // int days = days_in_month(&holidays[index]);
+    // printf("DAYS IN MONTH %d", days);
+
     printf("----> %d %d %d\n", holidays[index].month, holidays[index].day, holidays[index].year);
     index++;
   }
+
+  printf("----> %d %d %d\n", holidays[0].month, holidays[0].day, holidays[0].year);
+
+
 
 }
