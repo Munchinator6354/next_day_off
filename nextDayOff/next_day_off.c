@@ -43,11 +43,8 @@ typedef struct Date {
 // Compares two dates, returns -1 if Date1 before Date 2, returns 0 if Date1 is
 //  equal to Date2, returns 1 if Date2 is before Date1.
 int compare(Date* d1, Date* d2) {
-  if(d1->year < d2->year) {
-    return -1;
-  } else if(d1->year == d2->year d1->month < d2->month) {
-    return -1;
-  } else if(d1->year == d2->year d1->month == d2->month && d1->day < d2->day) {
+  if(d1->year < d2->year || d1->year == d2->year d1->month < d2->month ||
+          d1->year == d2->year d1->month == d2->month && d1->day < d2->day) {
     return -1;
   } else if(d1->year == d2->year d1->month == d2->month && d1->day == d2->day) {
     return 0;
@@ -56,8 +53,19 @@ int compare(Date* d1, Date* d2) {
   }
 }
 
+//Increments the day up by 1, accounting for month and year turnovers.
 void next_day(Date* d) {
-  
+  int full_month = days_in_month(&d);
+  if(d->day != full_month - 1) {
+    d->++;
+  } else if(d->day == full_month && d->month != 12) {
+    d->day = 1;
+    d->month++;
+  } else {
+    d->day = 1;
+    d->month = 1;
+    d->year++;
+  }
 }
 
 // Given a pointer to a Date struct, returns the amount of days in that month.
