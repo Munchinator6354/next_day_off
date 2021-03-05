@@ -54,21 +54,6 @@ int compare(Date* d1, Date* d2) {
   }
 }
 
-//Increments the day up by 1, accounting for month and year turnovers.
-void next_day(Date* d) {
-  int full_month = days_in_month(&d);
-  if(d->day < full_month) {
-    d->day++;
-  } else if(d->day == full_month && d->month != 12) {
-    d->day = 1;
-    d->month++;
-  } else {
-    d->day = 1;
-    d->month = 1;
-    d->year++;
-  }
-}
-
 // Given a pointer to a Date struct, returns the amount of days in that month.
 int days_in_month(Date* d) {
   if(d->month == 2 && d->year % 4 == 0 && d->year % 100 != 0) {
@@ -82,10 +67,42 @@ int days_in_month(Date* d) {
   }
 }
 
+//Increments the day up by 1, accounting for month and year turnovers.
+void next_day(Date* d) {
+  int full_month = days_in_month(d);
+  if(d->day < full_month) {
+    d->day++;
+  } else if(d->day == full_month && d->month != 12) {
+    d->day = 1;
+    d->month++;
+  } else {
+    d->day = 1;
+    d->month = 1;
+    d->year++;
+  }
+}
+
 // Asks the user for the current date in a month/dat/year format.
 void ask_for_date(int *month_given, int *day_given, int *year_given) {
   printf("What is the current date (month day year)? ");
   scanf("%d %d %d", month_given, day_given, year_given);
+}
+
+Date* read_data(int* holiday_count) {
+  // This read the first number in the file.
+  FILE* file = fopen("holidays.txt", "r");
+  fscanf(file, "%d", holiday_count);
+  Date* holidays = (Date*) malloc(*holiday_count * sizeof(Date));
+  int index = 0;
+  char reason[100];
+
+  // Goes through the file and grabs the holiday date from each line.
+  while(fscanf(file, "%d %d %d %[^\n]\n", &holidays[index].month, &holidays[index].day, &holidays[index].year, reason) != EOF) {
+    // holidays[index] = (Date) {month, day, year};
+    printf("----> %d %d %d\n", holidays[index].month, holidays[index].day, holidays[index].year);
+    index++;
+  }
+  return holidays;
 }
 
 int main() {
@@ -101,32 +118,9 @@ int main() {
   // Prints the Date that the user gave.
   // printf("%d %d %d", date_given.month, date_given.day, date_given.year);
 
-  // This read the first number in the file.
-  FILE* file = fopen("holidays.txt", "r");
   int holiday_count;
-  fscanf(file, "%d", &holiday_count);
-  Date holidays[holiday_count];
-  int index = 0;
-  int month;
-  int day;
-  int year;
-  char reason[100];
-
-  // Goes through the file and grabs the holiday date from each line.
-  while(fscanf(file, "%d %d %d %[^\n]\n", &month, &day, &year, reason) != EOF) {
-    Date current = {month, day, year};
-    holidays[index] = current;
-
-    // THIS WAS TO TEST DAYS IN MONTH FUNCTION
-    // int days = days_in_month(&holidays[index]);
-    // printf("DAYS IN MONTH %d", days);
-
-    printf("----> %d %d %d\n", holidays[index].month, holidays[index].day, holidays[index].year);
-    index++;
-  }
+  Date* holidays = read_data(&holiday_count);
 
   printf("----> %d %d %d\n", holidays[0].month, holidays[0].day, holidays[0].year);
-
-
 
 }
