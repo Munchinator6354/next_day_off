@@ -1,13 +1,14 @@
 // Ryan Isaacson, CS&131, Winter 2021
 // Programming Assignment #7, Next Day Off 03/05/2021
 //
-//
+// This program will prompt the user for a date and than look in an associated
+// holidays list file in the same folder and tell the user what the date of the
+// next holiday is and how many days until that holiday.
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 
 // Defines the fields of a Date structure/struct.
 typedef struct Date {
@@ -17,7 +18,7 @@ typedef struct Date {
 } Date;
 
 // Compares two dates, returns -1 if Date1 before Date 2, returns 0 if Date1 is
-//  equal to Date2, returns 1 if Date2 is before Date1.
+// equal to Date2, returns 1 if Date2 is before Date1.
 int compare(Date* d1, Date* d2) {
   if(d1->year < d2->year || d1->year == d2->year && d1->month < d2->month ||
           d1->year == d2->year && d1->month == d2->month && d1->day < d2->day) {
@@ -43,7 +44,7 @@ int days_in_month(Date* d) {
   }
 }
 
-//Increments the day up by 1, accounting for month and year turnovers.
+// Increments the day up by 1, accounting for month and year turnovers.
 void next_day(Date* d) {
   int full_month = days_in_month(d);
   if(d->day < full_month) {
