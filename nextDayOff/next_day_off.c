@@ -65,7 +65,6 @@ void ask_for_date(int *month_given, int *day_given, int *year_given) {
   scanf("%d %d %d", month_given, day_given, year_given);
 }
 
-
 // Reads a file and returns an array of holiday dates. Also sets holiday_count
 // back in main.
 Date* read_data(int* holiday_count) {
@@ -75,13 +74,17 @@ Date* read_data(int* holiday_count) {
   int index = 0;
   char reason[100];
   // Goes through the file and grabs the holiday date from each line.
-  while(fscanf(file, "%d %d %d %[^\n]\n", &holidays[index].month, &holidays[index].day, &holidays[index].year, reason) != EOF) {
+  while(fscanf(file, "%d %d %d %[^\n]\n", &holidays[index].month,
+                  &holidays[index].day, &holidays[index].year, reason) != EOF) {
     // holidays[index] = (Date) {month, day, year};
-    printf("----> %d %d %d\n", holidays[index].month, holidays[index].day, holidays[index].year);
+    printf("----> %d %d %d\n", holidays[index].month, holidays[index].day,
+                                                          holidays[index].year);
     index++;
   }
   return holidays;
 }
+
+
 
 int main() {
   // Defines spaces for information given by the user.
@@ -96,13 +99,104 @@ int main() {
   Date date_given = {month_given, day_given, year_given};
 
   // Prints the Date that the user gave.
-  printf("USER GAVE DATE: %d %d %d\n", date_given.month, date_given.day, date_given.year);
+  printf("USER GAVE DATE: %d %d %d\n", date_given.month, date_given.day,
+                                                              date_given.year);
 
-  // Reads the holday data in from another defined document.
+  // Reads the holiday data in from another defined document.
   int holiday_count;
   Date* holidays = read_data(&holiday_count);
 
-  // Proves I can print data from returned holidays array back in main.
-  // printf("----> %d %d %d\n", holidays[0].month, holidays[0].day, holidays[0].year);
+  // This section figures out when the next holiday is from the date entered for
+  // today and prints out when it is.
+  int compare_tester = 5;
+  int j = 0;
+  Date next_holiday = {0, 0, 0};
+  while(compare_tester > 0) {
+    Date current = holidays[j];
+
+    compare_tester = compare(&date_given, &current);
+
+    if(compare_tester == 1 || compare_tester == 0) {
+       Date next_holiday = current;
+    }
+
+    if(compare_tester == 0) {
+      printf("Happy day off!");
+    } else if(compare_tester == -1) {
+      printf("The next day off is %d/%d/%d.\n", current.month, current.day,
+                                                                  current.year);
+      printf("It is # days away.");
+    }
+    j++;
+  }
+
+
+  // int day_count;
+  //
+  // while(date_given != next_holiday) {
+  //   next_day(date_given);
+  //   day_count++;
+  // }
+
+
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+// Ryan's land of garbage code.....
+
+
+// Compares the given date to the list of holidays grab the next holiday.
+
+// Date closest_holiday = grab_next_holiday(holiday_count, &holidays, &date_given);
+//
+// printf("HOLIDAY GRABBED: %d %d %d\n", closest_holiday.month, closest_holiday.day, closest_holiday.year);
+
+
+
+
+// for(int i = 0; i < holiday_count; i++) {
+//   Date current = holidays[i];
+//   int compare_tester = compare(&date_given, &current);
+//
+//   if(compare_tester == 0) {
+//     printf("Happy day off!");
+//   } else if(compare_tester == -1) {
+//     printf("The next day off is %d/%d/%d.\n", current.month, current.day, current.year);
+//     // printf("It is # days away.");
+//   }
+// }
+
+// Date grab_next_holiday(int holiday_count, Date* holidays, Date* date_given) {
+//   for(int i = 0; i < holiday_count; i++) {
+//     Date current = holidays[i];
+//     int compare_tester = compare(date_given, &current);
+//
+//     if(compare_tester == 0 || compare_tester == 1) {
+//       return current;
+//     }
+//   return current;
+// }
+
+// for(int i = 0; i < holiday_count; i++) {
+//   Date current = holidays[i];
+//   int compare_tester = compare(&date_given, &current);
+//
+//   if(compare_tester == 0) {
+//     printf("Happy day off!\n");
+//   } else if(compare_tester == -1) {
+//     printf("The next day off is %d/%d/%d.\n", current.month, current.day, current.year);
+//     // printf("It is # days away.");
+//   }
+// }
