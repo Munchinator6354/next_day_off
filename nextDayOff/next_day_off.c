@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
 // You can alter the file name here for where this program gathers data from.
+// The options are "holidays.txt", "holidays2.txt", and "holidays3.txt".
 const char* FILE_NAME = "holidays3.txt";
 
 // Defines the fields of a Date structure/struct.
