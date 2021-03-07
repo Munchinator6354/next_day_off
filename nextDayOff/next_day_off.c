@@ -10,6 +10,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
+// You can alter the file name here for where this program gathers data from.
+const char* FILE_NAME = "holidays3.txt";
+
 // Defines the fields of a Date structure/struct.
 typedef struct Date {
   int month;
@@ -68,7 +72,7 @@ void ask_for_date(int *month_given, int *day_given, int *year_given) {
 // Reads a file and returns an array of holiday dates. Also sets holiday_count
 // back in main.
 Date* read_data(int* holiday_count) {
-  FILE* file = fopen("holidays.txt", "r");
+  FILE* file = fopen(FILE_NAME, "r");
   fscanf(file, "%d", holiday_count);
   Date* holidays = (Date*) malloc(*holiday_count * sizeof(Date));
   int index = 0;
@@ -76,9 +80,6 @@ Date* read_data(int* holiday_count) {
   // Goes through the file and grabs the holiday date from each line.
   while(fscanf(file, "%d %d %d %[^\n]\n", &holidays[index].month,
                   &holidays[index].day, &holidays[index].year, reason) != EOF) {
-    // holidays[index] = (Date) {month, day, year};
-    // printf("----> %d %d %d\n", holidays[index].month, holidays[index].day,
-    //                                                       holidays[index].year);
     index++;
   }
   return holidays;
@@ -107,27 +108,17 @@ int main() {
   // Turns the date given into and creates a whole date structure.
   Date date_given = {month_given, day_given, year_given};
 
-  // Prints the Date that the user gave.
-  // printf("USER GAVE DATE: %d %d %d\n", date_given.month, date_given.day,
-  //                                                             date_given.year);
-
   // Reads the holiday data in from another defined document.
   int holiday_count;
   Date* holidays = read_data(&holiday_count);
-
-  // Testing the days_in_month function to determine it's returning a day amount.
-  // int num = days_in_month(&day_given);
-  // printf("DAYS IN MONTH TEST: %d", num);
 
   // This section figures out when the next holiday is from the date entered for
   // today and prints out when it is.
   int compare_tester = 5;
   int j = 0;
-  while(compare_tester > 0) {
+  while(compare_tester > 0 && j < holiday_count) {
     Date current = holidays[j];
-
     compare_tester = compare(&date_given, &current);
-
     if(compare_tester == 0) {
       printf("Happy day off!");
     } else if(compare_tester == -1) {
@@ -137,5 +128,8 @@ int main() {
       printf("It is %d days away.", days_until);
     }
     j++;
+  }
+  if(j >= holiday_count) {
+    printf("No data available.");
   }
 }
